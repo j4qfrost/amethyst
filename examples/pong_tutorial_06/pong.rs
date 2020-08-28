@@ -2,10 +2,9 @@ use crate::{systems::ScoreText, Ball, Paddle, Side, ARENA_HEIGHT, ARENA_WIDTH};
 use amethyst::{
     assets::{AssetStorage, Handle, Loader},
     core::{timing::Time, transform::Transform},
-    ecs::prelude::World,
     prelude::*,
     renderer::{Camera, ImageFormat, SpriteRender, SpriteSheet, SpriteSheetFormat, Texture},
-    ui::{Anchor, TtfFormat, UiText, UiTransform},
+    ui::{Anchor, LineMode, TtfFormat, UiText, UiTransform},
 };
 
 #[derive(Default)]
@@ -104,10 +103,7 @@ fn initialise_paddles(world: &mut World, sprite_sheet_handle: Handle<SpriteSheet
     right_transform.set_translation_xyz(ARENA_WIDTH - PADDLE_WIDTH * 0.5, y, 0.0);
 
     // Assign the sprites for the paddles
-    let sprite_render = SpriteRender {
-        sprite_sheet: sprite_sheet_handle,
-        sprite_number: 0, // paddle is the first sprite in the sprite_sheet
-    };
+    let sprite_render = SpriteRender::new(sprite_sheet_handle, 0); // paddle is the first sprite in the sprite_sheet
 
     // Create a left plank entity.
     world
@@ -145,10 +141,7 @@ fn initialise_ball(world: &mut World, sprite_sheet_handle: Handle<SpriteSheet>) 
     local_transform.set_translation_xyz(ARENA_WIDTH / 2.0, ARENA_HEIGHT / 2.0, 0.0);
 
     // Assign the sprite for the ball
-    let sprite_render = SpriteRender {
-        sprite_sheet: sprite_sheet_handle,
-        sprite_number: 1, // ball is the second sprite on the sprite_sheet
-    };
+    let sprite_render = SpriteRender::new(sprite_sheet_handle, 1); // ball is the second sprite on the sprite_sheet
 
     world
         .create_entity()
@@ -198,6 +191,8 @@ fn initialise_score(world: &mut World) {
             "0".to_string(),
             [1.0, 1.0, 1.0, 1.0],
             50.,
+            LineMode::Single,
+            Anchor::Middle,
         ))
         .build();
     let p2_score = world
@@ -208,6 +203,8 @@ fn initialise_score(world: &mut World) {
             "0".to_string(),
             [1.0, 1.0, 1.0, 1.0],
             50.,
+            LineMode::Single,
+            Anchor::Middle,
         ))
         .build();
     world.insert(ScoreText { p1_score, p2_score });

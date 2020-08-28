@@ -46,7 +46,7 @@ use amethyst::{
     core::transform::Transform,
     core::SystemDesc,
     derive::SystemDesc,
-    ecs::prelude::{Join, System, SystemData, World, WriteStorage},
+    ecs::{Join, System, SystemData, World, WriteStorage},
 };
 
 use crate::pong::{Ball, ARENA_WIDTH, ARENA_HEIGHT};
@@ -252,7 +252,7 @@ game. We'll start by creating some structures in `pong.rs`:
 # extern crate amethyst;
 use amethyst::{
     // --snip--
-    ecs::prelude::{Component, DenseVecStorage, Entity},
+    ecs::{Component, DenseVecStorage, Entity},
 };
 
 /// ScoreBoard contains the actual score data
@@ -284,7 +284,7 @@ use amethyst::{
 #     ecs::Entity,
 #     prelude::*,
     // ...
-    ui::{Anchor, TtfFormat, UiText, UiTransform},
+    ui::{Anchor, LineMode, TtfFormat, UiText, UiTransform},
 };
 
 # pub struct Pong;
@@ -324,13 +324,22 @@ fn initialise_scoreboard(world: &mut World) {
             "0".to_string(),
             [1., 1., 1., 1.],
             50.,
+            LineMode::Single,
+            Anchor::Middle,
         ))
         .build();
 
     let p2_score = world
         .create_entity()
         .with(p2_transform)
-        .with(UiText::new(font, "0".to_string(), [1., 1., 1., 1.], 50.))
+        .with(UiText::new(
+            font,
+            "0".to_string(),
+            [1., 1., 1., 1.],
+            50.,
+            LineMode::Single,
+            Anchor::Middle,
+        ))
         .build();
 
 # pub struct ScoreText {pub p1_score: Entity,pub p2_score: Entity,}
@@ -411,7 +420,7 @@ use amethyst::{
 #     core::SystemDesc,
 #     derive::SystemDesc,
     // --snip--
-    ecs::prelude::{Join, ReadExpect, System, SystemData, World, Write, WriteStorage},
+    ecs::{Join, ReadExpect, System, SystemData, World, Write, WriteStorage},
     ui::UiText,
 };
 
