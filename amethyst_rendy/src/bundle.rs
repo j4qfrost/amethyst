@@ -78,7 +78,6 @@ impl<B: Backend> RenderingBundle<B> {
         event_loop: &EventLoop<()>,
         canvas: Option<HtmlCanvasElement>,
     ) -> Self {
-        #[cfg(feature = "wasm")]
         use amethyst_window::winit::platform::web::WindowBuilderExtWebSys;
 
         log::debug!("Intializing Rendy");
