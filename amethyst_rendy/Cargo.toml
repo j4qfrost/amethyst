@@ -26,7 +26,8 @@ gltf = { version = "0.15", features = ["KHR_lights_punctual"] }
 lazy_static = "1.4"
 log = "0.4"
 palette = { version = "0.4", features = ["serde"] }
-rendy = { version = "0.5.1", git = "https://github.com/amethyst/rendy.git", branch = "wasm", default-features = false, features = ["base", "mesh-obj", "texture-image", "texture-palette", "serde-1", "init"] }
+# rendy = { version = "0.5.1", git = "https://github.com/amethyst/rendy.git", branch = "wasm", default-features = false, features = ["base", "mesh-obj", "texture-image", "texture-palette", "serde-1", "init"] }
+rendy = { version = "0.5.1", path = "../../rendy/rendy", branch = "wasm", default-features = false, features = ["base", "mesh-obj", "texture-image", "texture-palette", "serde-1", "init"] }
 ron = "0.5"
 serde = { version = "1", features = ["serde_derive"] }
 fnv = "1"
@@ -44,7 +45,7 @@ web-sys = { version = "0.3.36" }
 rayon = "1.3.0"
 more-asserts = "0.2.1"
 criterion = "0.3.0"
-winit = { version = "0.22.0", git = "https://github.com/amethyst/winit.git", branch = "wasm" }
+winit = { version = "0.22.2", git = "https://github.com/j4qfrost/winit.git", branch = "wasm" }
 approx = "0.3"
 
 [features]

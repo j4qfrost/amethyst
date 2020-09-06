@@ -11,7 +11,7 @@ use derivative::Derivative;
 use smallvec::SmallVec;
 use std::{borrow::Borrow, hash::Hash};
 use winit::{
-    dpi::{LogicalPosition, PhysicalPosition},
+    dpi::{PhysicalPosition},
     event::{
         DeviceEvent, ElementState, Event, KeyboardInput, MouseButton, MouseScrollDelta,
         VirtualKeyCode, WindowEvent,
@@ -263,7 +263,7 @@ where
                     self.invoke_wheel_moved(delta_x, delta_y, event_handler);
                 }
                 DeviceEvent::MouseWheel {
-                    delta: MouseScrollDelta::PixelDelta(LogicalPosition { x, y }),
+                    delta: MouseScrollDelta::PixelDelta(PhysicalPosition { x, y }),
                 } => {
                     if x != 0.0 {
                         self.mouse_wheel_horizontal = x.signum() as f32;

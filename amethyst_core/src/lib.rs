@@ -26,6 +26,8 @@ pub use specs::{shred, shrev};
 
 use std::sync::Arc;
 
+pub use core::{fmt, clone};
+
 pub use crate::{
     bundle::SystemBundle,
     event::EventReader,
